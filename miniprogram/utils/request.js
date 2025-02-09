@@ -1,29 +1,23 @@
-const app = getApp()
-const BASE_URL = 'http://localhost:8000/api/v1'  // 开发环境地址
+const config = require('../config/index')
 
-const request = (url, options = {}) => {
+const request = (method, url, data = {}) => {
   return new Promise((resolve, reject) => {
     const token = wx.getStorageSync('token')
-    const header = {
-      'Content-Type': 'application/json',
-      ...options.header
-    }
     
-    if (token) {
-      header.Authorization = `Bearer ${token}`
-    }
-
     wx.request({
-      url: `${BASE_URL}${url}`,
-      method: options.method || 'GET',
-      data: options.data,
-      header,
+      url: `${config.apiBaseUrl}${url}`,
+      method,
+      data,
+      header: {
+        'Content-Type': 'application/json',
+        'Authorization': token ? `Bearer ${token}` : ''
+      },
       success: (res) => {
         if (res.statusCode === 401) {
-          // token失效，清除登录状态
+          // token过期，跳转到登录页
           wx.removeStorageSync('token')
           wx.removeStorageSync('userInfo')
-          wx.navigateTo({
+          wx.redirectTo({
             url: '/pages/login/index'
           })
           reject(new Error('未授权'))
@@ -33,48 +27,22 @@ const request = (url, options = {}) => {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data)
         } else {
-          reject(res)
+          reject(new Error(res.data.message || '请求失败'))
         }
       },
-      fail: (err) => {
-        reject(err)
+      fail: (error) => {
+        reject(error)
       }
     })
   })
 }
 
-const get = (url, options = {}) => {
-  return request(url, {
-    method: 'GET',
-    ...options
-  })
-}
-
-const post = (url, data, options = {}) => {
-  return request(url, {
-    method: 'POST',
-    data,
-    ...options
-  })
-}
-
-const put = (url, data, options = {}) => {
-  return request(url, {
-    method: 'PUT',
-    data,
-    ...options
-  })
-}
-
-const del = (url, options = {}) => {
-  return request(url, {
-    method: 'DELETE',
-    ...options
-  })
-}
+const get = (url, data) => request('GET', url, data)
+const post = (url, data) => request('POST', url, data)
+const put = (url, data) => request('PUT', url, data)
+const del = (url, data) => request('DELETE', url, data)
 
 module.exports = {
-  request,
   get,
   post,
   put,

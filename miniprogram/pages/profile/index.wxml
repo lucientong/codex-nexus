@@ -1,0 +1,36 @@
+<!--pages/profile/index.wxml-->
+<view class="container">
+  <!-- 用户信息区域 -->
+  <view class="user-info">
+    <image class="avatar" src="{{userInfo.avatar_url || '/assets/icons/default-avatar.png'}}" mode="aspectFill"></image>
+    <view class="info">
+      <text class="nickname">{{userInfo.nickname || '未登录'}}</text>
+      <text class="id" wx:if="{{userInfo}}">ID: {{userInfo.id}}</text>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="menu-list">
+    <view class="menu-item" bindtap="handleEditProfile">
+      <text class="menu-text">编辑资料</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="handleBorrowRecords">
+      <text class="menu-text">借阅记录</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="handleReadingRecords">
+      <text class="menu-text">阅读记录</text>
+      <text class="arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="handleSettings">
+      <text class="menu-text">设置</text>
+      <text class="arrow">></text>
+    </view>
+  </view>
+
+  <!-- 退出登录按钮 -->
+  <view class="logout-btn" bindtap="handleLogout" wx:if="{{userInfo}}">
+    退出登录
+  </view>
+</view>

@@ -1,0 +1,4 @@
+<!--pages/collection/index.wxml-->
+<view class="container">
+  <text>我的藏品</text>
+</view>

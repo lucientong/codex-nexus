@@ -1,0 +1,69 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# 虚拟环境
+venv/
+ENV/
+env/
+.env
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# 日志文件
+*.log
+logs/
+log/
+
+# 数据库
+*.sqlite3
+*.db
+
+# 配置文件
+backend/config/config.yaml
+backend/alembic.ini
+
+# 测试覆盖率报告
+.coverage
+htmlcov/
+coverage.xml
+
+# 缓存
+.pytest_cache/
+.mypy_cache/
+.pyre/
+
+# 微信小程序
+miniprogram/node_modules/
+miniprogram/miniprogram_npm/
+miniprogram/project.private.config.json
+
+# 其他
+*.bak
+*.tmp
+*.temp
+.env.*
+!.env.example 

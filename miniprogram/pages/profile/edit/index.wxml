@@ -1,0 +1,35 @@
+<view class="container">
+  <form bindsubmit="handleSubmit">
+    <!-- 头像上传 -->
+    <view class="avatar-section">
+      <image class="avatar" src="{{form.avatar_url || '/assets/icons/default-avatar.png'}}" mode="aspectFill"></image>
+      <button class="upload-btn" bindtap="handleUploadAvatar">更换头像</button>
+    </view>
+
+    <!-- 表单区域 -->
+    <view class="form-group">
+      <view class="form-item">
+        <text class="label">昵称</text>
+        <input class="input" name="nickname" value="{{form.nickname}}" placeholder="请输入昵称" maxlength="32" />
+      </view>
+      
+      <view class="form-item">
+        <text class="label">邮箱</text>
+        <input class="input" name="email" value="{{form.email}}" placeholder="请输入邮箱" type="text" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">手机号</text>
+        <input class="input" name="phone" value="{{form.phone}}" placeholder="请输入手机号" type="number" maxlength="11" />
+      </view>
+
+      <view class="form-item">
+        <text class="label">个人简介</text>
+        <textarea class="textarea" name="bio" value="{{form.bio}}" placeholder="请输入个人简介" maxlength="500" />
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <button class="submit-btn" form-type="submit" loading="{{submitting}}">保存修改</button>
+  </form>
+</view> 

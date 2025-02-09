@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="logo">
+    <!-- 测试Base64图片 -->
+    <image 
+      src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNmOGY4ZjgiLz4KICA8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSIjMzMzIi8+CiAgPHRleHQgeD0iMTAwIiB5PSIxMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+6JGX5Lmm5LqRPC90ZXh0Pgo8L3N2Zz4="
+      mode="aspectFit"
+      binderror="handleImageError"
+    ></image>
+  </view>
+  <view class="title">藏书云廊</view>
+  <view class="subtitle">登录以使用完整功能</view>
+  
+  <button 
+    class="login-btn {{loading ? 'loading' : ''}}"
+    type="primary" 
+    bindtap="handleLogin"
+    loading="{{loading}}"
+  >
+    微信一键登录
+  </button>
+</view> 

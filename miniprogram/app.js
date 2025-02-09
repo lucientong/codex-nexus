@@ -7,8 +7,12 @@ App({
   },
 
   onLaunch() {
-    // 获取系统信息
-    const systemInfo = wx.getSystemInfoSync()
+    // 获取系统信息（新API）
+    const systemInfo = {
+      ...wx.getDeviceInfo(),
+      ...wx.getWindowInfo(),
+      ...wx.getAppBaseInfo()
+    }
     this.globalData.systemInfo = systemInfo
 
     // 检查登录状态

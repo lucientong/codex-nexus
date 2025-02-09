@@ -1,0 +1,105 @@
+<view class="container">
+  <!-- 基本设置 -->
+  <view class="section">
+    <view class="section-title">基本设置</view>
+    <view class="menu-list">
+      <!-- 语言设置 -->
+      <view class="menu-item" bindtap="handleLanguage">
+        <view class="menu-info">
+          <text class="menu-label">语言</text>
+          <text class="menu-value">{{languageMap[currentLanguage]}}</text>
+        </view>
+        <text class="arrow">></text>
+      </view>
+      <!-- 主题设置 -->
+      <view class="menu-item">
+        <view class="menu-info">
+          <text class="menu-label">深色模式</text>
+        </view>
+        <switch checked="{{isDarkMode}}" bindchange="handleThemeChange" color="#333333" />
+      </view>
+      <!-- 字体大小 -->
+      <view class="menu-item">
+        <view class="menu-info">
+          <text class="menu-label">字体大小</text>
+          <text class="menu-value">{{fontSizeMap[fontSize]}}</text>
+        </view>
+        <slider 
+          class="font-slider" 
+          min="0" 
+          max="2" 
+          step="1" 
+          value="{{fontSize}}" 
+          bindchange="handleFontSizeChange"
+          activeColor="#333333"
+          backgroundColor="#e9e9e9"
+          block-size="24"
+        />
+      </view>
+    </view>
+  </view>
+
+  <!-- 隐私设置 -->
+  <view class="section">
+    <view class="section-title">隐私设置</view>
+    <view class="menu-list">
+      <view class="menu-item">
+        <view class="menu-info">
+          <text class="menu-label">借阅记录对他人可见</text>
+        </view>
+        <switch checked="{{borrowVisible}}" bindchange="handleBorrowVisibleChange" color="#333333" />
+      </view>
+      <view class="menu-item">
+        <view class="menu-info">
+          <text class="menu-label">阅读记录对他人可见</text>
+        </view>
+        <switch checked="{{readingVisible}}" bindchange="handleReadingVisibleChange" color="#333333" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 存储空间 -->
+  <view class="section">
+    <view class="section-title">存储空间</view>
+    <view class="menu-list">
+      <view class="menu-item">
+        <view class="menu-info">
+          <text class="menu-label">缓存大小</text>
+          <text class="menu-value">{{cacheSize}}</text>
+        </view>
+        <button 
+          class="clear-btn" 
+          size="mini" 
+          bindtap="handleClearCache" 
+          loading="{{clearing}}"
+        >清理缓存</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="section">
+    <view class="section-title">关于</view>
+    <view class="menu-list">
+      <view class="menu-item" bindtap="handleAbout">
+        <view class="menu-info">
+          <text class="menu-label">关于藏书云廊</text>
+          <text class="menu-value">v{{version}}</text>
+        </view>
+        <text class="arrow">></text>
+      </view>
+      <view class="menu-item" bindtap="handlePrivacyPolicy">
+        <view class="menu-info">
+          <text class="menu-label">隐私政策</text>
+        </view>
+        <text class="arrow">></text>
+      </view>
+      <view class="menu-item" bindtap="handleUserAgreement">
+        <view class="menu-info">
+          <text class="menu-label">用户协议</text>
+        </view>
+        <text class="arrow">></text>
+      </view>
+    </view>
+  </view>
+</view> 

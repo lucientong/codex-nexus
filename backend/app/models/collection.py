@@ -25,11 +25,38 @@ class CollectionBase(Base):
 
     @declared_attr
     def library(cls):
-        return relationship("Library", back_populates="collections")
+        """
+        根据类名动态生成与 Library 的关系
+        """
+        collection_type = cls.__name__.lower()
+        if collection_type == "vinylrecord":
+            collection_type = "vinyl_records"
+        elif collection_type == "gamecartridge":
+            collection_type = "game_cartridges"
+        else:
+            collection_type = f"{collection_type}s"
+            
+        return relationship("Library", back_populates=collection_type)
 
     @declared_attr
     def borrow_records(cls):
-        return relationship("BorrowRecord", back_populates="collection")
+        """
+        根据类名动态生成与 BorrowRecord 的关系
+        """
+        collection_type = cls.__name__.lower()
+        if collection_type == "vinylrecord":
+            collection_type = "vinyl_record"
+        elif collection_type == "gamecartridge":
+            collection_type = "game_cartridge"
+        
+        return relationship(
+            "BorrowRecord",
+            primaryjoin=f"and_(BorrowRecord.collection_id == {cls.__name__}.id, "
+                       f"BorrowRecord.collection_type == '{collection_type}')",
+            foreign_keys="[BorrowRecord.collection_id]",
+            back_populates=collection_type,
+            overlaps="book,magazine,cd,vinyl_record,dvd,game_cartridge"
+        )
 
 class Book(CollectionBase):
     """图书模型"""

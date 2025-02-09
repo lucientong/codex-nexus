@@ -1,0 +1,66 @@
+<view class="container">
+  <!-- 状态切换 -->
+  <view class="tab-bar">
+    <view 
+      class="tab-item {{currentStatus === '' ? 'active' : ''}}" 
+      bindtap="handleChangeStatus" 
+      data-status=""
+    >全部</view>
+    <view 
+      class="tab-item {{currentStatus === 'pending' ? 'active' : ''}}" 
+      bindtap="handleChangeStatus" 
+      data-status="pending"
+    >待审核</view>
+    <view 
+      class="tab-item {{currentStatus === 'approved' ? 'active' : ''}}" 
+      bindtap="handleChangeStatus" 
+      data-status="approved"
+    >已借出</view>
+    <view 
+      class="tab-item {{currentStatus === 'returned' ? 'active' : ''}}" 
+      bindtap="handleChangeStatus" 
+      data-status="returned"
+    >已归还</view>
+  </view>
+
+  <!-- 记录列表 -->
+  <scroll-view 
+    class="record-list" 
+    scroll-y 
+    bindscrolltolower="handleLoadMore"
+    refresher-enabled
+    bindrefresherrefresh="handleRefresh"
+    refresher-triggered="{{refreshing}}"
+  >
+    <view wx:if="{{records.length > 0}}">
+      <view class="record-item" wx:for="{{records}}" wx:key="id">
+        <image class="cover" src="{{item.collection.cover_url}}" mode="aspectFill"></image>
+        <view class="info">
+          <view class="title">{{item.collection.title}}</view>
+          <view class="meta">
+            <text class="type">{{item.collection_type}}</text>
+            <text class="date">借阅日期：{{item.borrow_date}}</text>
+          </view>
+          <view class="status {{item.status}}">{{statusMap[item.status]}}</view>
+        </view>
+        <!-- 操作按钮 -->
+        <view class="actions" wx:if="{{item.status === 'approved'}}">
+          <button 
+            class="action-btn return" 
+            size="mini" 
+            bindtap="handleReturn" 
+            data-id="{{item.id}}"
+          >归还</button>
+        </view>
+      </view>
+      <!-- 加载更多 -->
+      <view class="loading" wx:if="{{loading}}">加载中...</view>
+      <view class="no-more" wx:if="{{!hasMore && !loading}}">没有更多了</view>
+    </view>
+    <!-- 空状态 -->
+    <view class="empty" wx:else>
+      <image class="empty-icon" src="/assets/icons/empty.png"></image>
+      <text>暂无借阅记录</text>
+    </view>
+  </scroll-view>
+</view> 

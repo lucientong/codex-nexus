@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text, Float, Enum
 from sqlalchemy.orm import relationship
 
@@ -17,8 +17,8 @@ class ReadingRecord(Base):
     progress = Column(Float)  # 阅读进度（百分比）
     rating = Column(Integer)  # 评分（1-5）
     note = Column(Text)  # 笔记
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    updated_at = Column(DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC))
 
     # 关联关系
     user = relationship("User", back_populates="reading_records") 

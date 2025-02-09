@@ -5,7 +5,15 @@
         "not_found": "Resource not found",
         "unauthorized": "Unauthorized access",
         "forbidden": "Access forbidden",
-        "validation_error": "Validation error"
+        "validation_error": "Validation error",
+        "internal_error": "Internal server error",
+        "400": "Bad request",
+        "401": "Unauthorized",
+        "403": "Forbidden",
+        "404": "Not found",
+        "409": "Conflict",
+        "422": "Validation error",
+        "500": "Internal server error"
     },
     "user": {
         "login_success": "Login successful",
@@ -14,7 +22,11 @@
         "register_failed": "Registration failed",
         "logout_success": "Logout successful",
         "user_not_found": "User not found",
-        "invalid_password": "Invalid password"
+        "invalid_password": "Invalid password",
+        "email_exists": "Email already registered",
+        "phone_exists": "Phone number already registered",
+        "profile_updated": "Profile updated successfully",
+        "account_deactivated": "Account deactivated"
     },
     "collection": {
         "create_success": "Collection added successfully",

@@ -2,6 +2,7 @@ from typing import List
 from pydantic_settings import BaseSettings
 from pydantic import AnyHttpUrl, field_validator
 from typing import Optional, Union
+from pydantic import ConfigDict
 
 class Settings(BaseSettings):
     # 应用配置
@@ -54,8 +55,6 @@ class Settings(BaseSettings):
             return v
         raise ValueError(v)
     
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    model_config = ConfigDict(env_file=".env", case_sensitive=True)
 
 settings = Settings() 

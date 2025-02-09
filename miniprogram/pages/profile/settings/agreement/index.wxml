@@ -1,0 +1,76 @@
+<view class="container">
+  <view class="title">用户协议</view>
+  <view class="content">
+    <view class="section">
+      <view class="section-title">1. 协议范围</view>
+      <view class="section-content">
+        本协议是您与藏书云廊平台之间就使用藏书云廊小程序服务所订立的协议。请您仔细阅读本协议，您点击"同意"或使用藏书云廊服务，即表示您同意接受本协议的全部内容。
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">2. 账号注册</view>
+      <view class="section-content">
+        您承诺：
+        <view class="list-item">提供真实、准确、完整的个人资料</view>
+        <view class="list-item">及时更新个人资料，确保其真实性</view>
+        <view class="list-item">不得冒充他人或提供虚假信息</view>
+        <view class="list-item">妥善保管账号和密码，对账号下的所有行为负责</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">3. 服务内容</view>
+      <view class="section-content">
+        藏书云廊提供以下服务：
+        <view class="list-item">藏品管理：图书、杂志、CD、黑胶、DVD等藏品的数字化管理</view>
+        <view class="list-item">借阅服务：用户间的藏品借阅、归还管理</view>
+        <view class="list-item">阅读记录：记录和分享阅读心得</view>
+        <view class="list-item">社交互动：用户间的交流与分享</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">4. 用户行为规范</view>
+      <view class="section-content">
+        您在使用服务时应遵守：
+        <view class="list-item">遵守中华人民共和国相关法律法规</view>
+        <view class="list-item">尊重他人知识产权和合法权益</view>
+        <view class="list-item">不得发布违法、违规、色情、暴力等内容</view>
+        <view class="list-item">不得从事任何可能损害平台或他人权益的行为</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">5. 知识产权</view>
+      <view class="section-content">
+        <view class="list-item">平台所有内容的知识产权归藏书云廊所有</view>
+        <view class="list-item">用户发布的内容知识产权归用户所有</view>
+        <view class="list-item">用户授权平台对其发布的内容进行使用和传播</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">6. 免责声明</view>
+      <view class="section-content">
+        <view class="list-item">对因不可抗力导致的服务中断或终止不承担责任</view>
+        <view class="list-item">对用户间因借阅产生的纠纷不承担责任</view>
+        <view class="list-item">对用户提供信息的真实性不承担责任</view>
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">7. 协议修改</view>
+      <view class="section-content">
+        我们保留随时修改本协议的权利。协议修改后，我们会在小程序内发布通知。如您继续使用我们的服务，即表示您同意接受修改后的协议。
+      </view>
+    </view>
+
+    <view class="section">
+      <view class="section-title">8. 法律适用</view>
+      <view class="section-content">
+        本协议的订立、执行和解释及争议的解决均应适用中华人民共和国法律。如发生本协议相关的任何纠纷，双方应友好协商解决；协商不成时，任何一方均可向藏书云廊运营方所在地的人民法院提起诉讼。
+      </view>
+    </view>
+  </view>
+</view> 

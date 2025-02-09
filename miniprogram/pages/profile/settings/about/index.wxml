@@ -1,0 +1,64 @@
+<view class="container">
+  <!-- Logo区域 -->
+  <view class="logo-section">
+    <image class="logo" src="/assets/images/logo.png" mode="aspectFit"></image>
+    <view class="app-name">藏书云廊</view>
+    <view class="version">Version {{version}}</view>
+  </view>
+
+  <!-- 功能介绍 -->
+  <view class="feature-section">
+    <view class="section-title">主要功能</view>
+    <view class="feature-list">
+      <view class="feature-item">
+        <view class="feature-icon">📚</view>
+        <view class="feature-info">
+          <view class="feature-name">藏品管理</view>
+          <view class="feature-desc">支持图书、杂志、CD、黑胶、DVD等多种藏品的数字化管理</view>
+        </view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">🤝</view>
+        <view class="feature-info">
+          <view class="feature-name">借阅共享</view>
+          <view class="feature-desc">用户间的藏品借阅、归还管理，促进资源共享</view>
+        </view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">📝</view>
+        <view class="feature-info">
+          <view class="feature-name">阅读记录</view>
+          <view class="feature-desc">记录阅读进度、心得，分享阅读体验</view>
+        </view>
+      </view>
+      <view class="feature-item">
+        <view class="feature-icon">👥</view>
+        <view class="feature-info">
+          <view class="feature-name">社交互动</view>
+          <view class="feature-desc">与志同道合的书友交流分享，建立阅读社区</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 联系方式 -->
+  <view class="contact-section">
+    <view class="section-title">联系我们</view>
+    <view class="contact-list">
+      <view class="contact-item" bindtap="copyEmail">
+        <text class="contact-label">邮箱：</text>
+        <text class="contact-value">support@codexnexus.com</text>
+      </view>
+      <view class="contact-item" bindtap="copyWechat">
+        <text class="contact-label">微信：</text>
+        <text class="contact-value">codexnexus</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 版权信息 -->
+  <view class="copyright">
+    <text>Copyright © {{year}} Codex Nexus</text>
+    <text>All Rights Reserved</text>
+  </view>
+</view> 

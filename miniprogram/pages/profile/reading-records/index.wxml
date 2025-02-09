@@ -1,0 +1,93 @@
+<view class="container">
+  <!-- 类型切换 -->
+  <view class="tab-bar">
+    <view 
+      class="tab-item {{currentType === '' ? 'active' : ''}}" 
+      bindtap="handleChangeType" 
+      data-type=""
+    >全部</view>
+    <view 
+      class="tab-item {{currentType === 'book' ? 'active' : ''}}" 
+      bindtap="handleChangeType" 
+      data-type="book"
+    >图书</view>
+    <view 
+      class="tab-item {{currentType === 'magazine' ? 'active' : ''}}" 
+      bindtap="handleChangeType" 
+      data-type="magazine"
+    >杂志</view>
+  </view>
+
+  <!-- 记录列表 -->
+  <scroll-view 
+    class="record-list" 
+    scroll-y 
+    bindscrolltolower="handleLoadMore"
+    refresher-enabled
+    bindrefresherrefresh="handleRefresh"
+    refresher-triggered="{{refreshing}}"
+  >
+    <view wx:if="{{records.length > 0}}">
+      <view class="record-item" wx:for="{{records}}" wx:key="id">
+        <image class="cover" src="{{item.collection.cover_url}}" mode="aspectFill"></image>
+        <view class="info">
+          <view class="title">{{item.collection.title}}</view>
+          <view class="meta">
+            <text class="type">{{item.collection_type}}</text>
+            <text class="date">开始时间：{{item.start_time}}</text>
+            <text class="duration">阅读时长：{{item.duration}}分钟</text>
+          </view>
+          <!-- 阅读进度 -->
+          <view class="progress-bar">
+            <view class="progress" style="width: {{item.progress}}%"></view>
+          </view>
+          <text class="progress-text">阅读进度：{{item.progress}}%</text>
+          <!-- 评分 -->
+          <view class="rating">
+            <text class="rating-label">评分：</text>
+            <view class="stars">
+              <view 
+                class="star {{index < item.rating ? 'active' : ''}}" 
+                wx:for="{{5}}" 
+                wx:key="*this"
+                wx:for-index="index"
+              ></view>
+            </view>
+          </view>
+        </view>
+        <!-- 笔记按钮 -->
+        <view class="actions">
+          <button 
+            class="action-btn note" 
+            size="mini" 
+            bindtap="handleViewNote" 
+            data-id="{{item.id}}"
+            wx:if="{{item.note}}"
+          >查看笔记</button>
+        </view>
+      </view>
+      <!-- 加载更多 -->
+      <view class="loading" wx:if="{{loading}}">加载中...</view>
+      <view class="no-more" wx:if="{{!hasMore && !loading}}">没有更多了</view>
+    </view>
+    <!-- 空状态 -->
+    <view class="empty" wx:else>
+      <image class="empty-icon" src="/assets/icons/empty.png"></image>
+      <text>暂无阅读记录</text>
+    </view>
+  </scroll-view>
+
+  <!-- 笔记弹窗 -->
+  <view class="note-modal {{showNoteModal ? 'show' : ''}}">
+    <view class="modal-mask" bindtap="handleCloseNote"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">阅读笔记</text>
+        <text class="modal-close" bindtap="handleCloseNote">×</text>
+      </view>
+      <view class="modal-body">
+        <text class="note-text">{{currentNote}}</text>
+      </view>
+    </view>
+  </view>
+</view> 

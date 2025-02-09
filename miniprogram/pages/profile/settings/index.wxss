@@ -1,0 +1,109 @@
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.section {
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 28rpx;
+  color: #999;
+  padding: 20rpx 0;
+}
+
+.menu-list {
+  background-color: #fff;
+  border-radius: 12rpx;
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 20rpx;
+}
+
+.menu-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.menu-value {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.arrow {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.font-slider {
+  width: 240rpx;
+  margin: 0;
+}
+
+.clear-btn {
+  font-size: 24rpx;
+  color: #333;
+  background-color: #f8f8f8;
+  border: 1rpx solid #ddd;
+  padding: 0 24rpx;
+  border-radius: 24rpx;
+  line-height: 48rpx;
+}
+
+/* 深色模式 */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1f1f1f;
+  }
+
+  .menu-list {
+    background-color: #2c2c2c;
+  }
+
+  .menu-item {
+    border-bottom-color: #3d3d3d;
+  }
+
+  .menu-label {
+    color: #fff;
+  }
+
+  .menu-value {
+    color: #666;
+  }
+
+  .arrow {
+    color: #666;
+  }
+
+  .section-title {
+    color: #666;
+  }
+
+  .clear-btn {
+    color: #fff;
+    background-color: #3d3d3d;
+    border-color: #4d4d4d;
+  }
+} 

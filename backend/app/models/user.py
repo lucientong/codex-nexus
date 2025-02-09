@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from sqlalchemy import Column, Integer, String, DateTime, Boolean
 from sqlalchemy.orm import relationship
 
@@ -9,11 +9,14 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     openid = Column(String(64), unique=True, index=True, nullable=False)
-    nickname = Column(String(64))
+    nickname = Column(String(32))
     avatar_url = Column(String(255))
+    email = Column(String(255), unique=True, index=True)
+    phone = Column(String(11), unique=True, index=True)
+    bio = Column(String(500))
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(UTC))
+    updated_at = Column(DateTime, default=lambda: datetime.now(UTC), onupdate=lambda: datetime.now(UTC))
 
     # 关联关系
     libraries = relationship("Library", back_populates="owner")

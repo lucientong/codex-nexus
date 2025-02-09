@@ -1,11 +1,13 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException
 
 from app.core.config import settings
-from app.core.i18n import setup_i18n
+from app.core.i18n import setup_i18n, get_locale, t
+from app.core.exceptions import CodexNexusException
+from app.api.v1 import api_router
 
 app = FastAPI(
     title="Codex Nexus API",
@@ -29,17 +31,50 @@ setup_i18n()
 
 # 异常处理
 @app.exception_handler(RequestValidationError)
-async def validation_exception_handler(request, exc):
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    locale = get_locale(request)
     return JSONResponse(
         status_code=422,
-        content={"detail": str(exc)},
+        content={
+            "error_code": "VALIDATION_ERROR",
+            "detail": t("common.validation_error", locale=locale),
+            "errors": exc.errors()
+        },
     )
 
 @app.exception_handler(HTTPException)
-async def http_exception_handler(request, exc):
+async def http_exception_handler(request: Request, exc: HTTPException):
+    locale = get_locale(request)
     return JSONResponse(
         status_code=exc.status_code,
-        content={"detail": exc.detail},
+        content={
+            "error_code": getattr(exc, "error_code", "HTTP_ERROR"),
+            "detail": t(f"common.{exc.status_code}", locale=locale, default=str(exc.detail))
+        },
+        headers=getattr(exc, "headers", None)
+    )
+
+@app.exception_handler(CodexNexusException)
+async def codex_nexus_exception_handler(request: Request, exc: CodexNexusException):
+    locale = get_locale(request)
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "error_code": exc.error_code,
+            "detail": t(exc.detail, locale=locale) if exc.detail.startswith("common.") else exc.detail
+        },
+        headers=exc.headers
+    )
+
+@app.exception_handler(Exception)
+async def general_exception_handler(request: Request, exc: Exception):
+    locale = get_locale(request)
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error_code": "INTERNAL_ERROR",
+            "detail": t("common.internal_error", locale=locale)
+        }
     )
 
 # 健康检查
@@ -47,9 +82,8 @@ async def http_exception_handler(request, exc):
 async def health_check():
     return {"status": "ok"}
 
-# 导入路由
-# from app.api.v1 import api_router
-# app.include_router(api_router, prefix=settings.API_V1_PREFIX)
+# 注册路由
+app.include_router(api_router, prefix=settings.API_V1_PREFIX)
 
 if __name__ == "__main__":
     import uvicorn
