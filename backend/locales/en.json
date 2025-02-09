@@ -1,0 +1,46 @@
+{
+    "common": {
+        "success": "Operation successful",
+        "error": "Operation failed",
+        "not_found": "Resource not found",
+        "unauthorized": "Unauthorized access",
+        "forbidden": "Access forbidden",
+        "validation_error": "Validation error"
+    },
+    "user": {
+        "login_success": "Login successful",
+        "login_failed": "Login failed",
+        "register_success": "Registration successful",
+        "register_failed": "Registration failed",
+        "logout_success": "Logout successful",
+        "user_not_found": "User not found",
+        "invalid_password": "Invalid password"
+    },
+    "collection": {
+        "create_success": "Collection added successfully",
+        "update_success": "Collection updated successfully",
+        "delete_success": "Collection deleted successfully",
+        "not_found": "Collection not found",
+        "duplicate": "Collection already exists",
+        "invalid_isbn": "Invalid ISBN",
+        "invalid_isrc": "Invalid ISRC",
+        "invalid_issn": "Invalid ISSN",
+        "invalid_isan": "Invalid ISAN"
+    },
+    "library": {
+        "create_success": "Library created successfully",
+        "update_success": "Library updated successfully",
+        "delete_success": "Library deleted successfully",
+        "not_found": "Library not found",
+        "duplicate_name": "Library name already exists"
+    },
+    "borrow": {
+        "request_success": "Borrow request submitted successfully",
+        "approve_success": "Borrow request approved",
+        "reject_success": "Borrow request rejected",
+        "return_success": "Return successful",
+        "not_found": "Borrow record not found",
+        "already_borrowed": "Item is already borrowed",
+        "not_available": "Item is not available for borrowing"
+    }
+} 
