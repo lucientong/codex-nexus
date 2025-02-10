@@ -1,0 +1,540 @@
+<view class="container">
+  <form bindsubmit="handleSubmit">
+    <!-- 基本信息 -->
+    <view class="form-group">
+      <view class="form-item">
+        <text class="label required">标题</text>
+        <input 
+          class="input" 
+          name="title" 
+          value="{{form.title}}" 
+          placeholder="请输入藏品标题"
+          maxlength="256"
+        />
+      </view>
+
+      <!-- 封面上传 -->
+      <view class="form-item">
+        <text class="label">封面</text>
+        <view class="cover-upload" bindtap="handleUploadCover">
+          <image 
+            class="cover-image" 
+            src="{{form.cover_url || '/assets/icons/upload.png'}}" 
+            mode="aspectFill"
+          ></image>
+          <text class="upload-text">{{form.cover_url ? '点击更换' : '点击上传'}}</text>
+        </view>
+      </view>
+
+      <view class="form-item">
+        <text class="label">描述</text>
+        <textarea 
+          class="textarea" 
+          name="description" 
+          value="{{form.description}}" 
+          placeholder="请输入藏品描述"
+          maxlength="1000"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">购入价格</text>
+        <input 
+          class="input" 
+          type="digit" 
+          name="purchase_price" 
+          value="{{form.purchase_price}}" 
+          placeholder="请输入购入价格"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">市场价格</text>
+        <input 
+          class="input" 
+          type="digit" 
+          name="market_price" 
+          value="{{form.market_price}}" 
+          placeholder="请输入市场价格"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">存放位置</text>
+        <input 
+          class="input" 
+          name="location" 
+          value="{{form.location}}" 
+          placeholder="请输入存放位置"
+          maxlength="128"
+        />
+      </view>
+    </view>
+
+    <!-- 图书特有字段 -->
+    <view class="form-group" wx:if="{{type === 'book'}}">
+      <view class="form-item">
+        <text class="label">ISBN</text>
+        <input 
+          class="input" 
+          name="isbn" 
+          value="{{form.isbn}}" 
+          placeholder="请输入ISBN"
+          maxlength="13"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">作者</text>
+        <input 
+          class="input" 
+          name="author" 
+          value="{{form.author}}" 
+          placeholder="请输入作者"
+          maxlength="256"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">出版社</text>
+        <input 
+          class="input" 
+          name="publisher" 
+          value="{{form.publisher}}" 
+          placeholder="请输入出版社"
+          maxlength="128"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">出版日期</text>
+        <picker 
+          mode="date" 
+          value="{{form.publish_date}}" 
+          bindchange="handlePublishDateChange"
+        >
+          <view class="picker">{{form.publish_date || '请选择出版日期'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">语言</text>
+        <input 
+          class="input" 
+          name="language" 
+          value="{{form.language}}" 
+          placeholder="请输入语言"
+          maxlength="32"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">页数</text>
+        <input 
+          class="input" 
+          type="number" 
+          name="page_count" 
+          value="{{form.page_count}}" 
+          placeholder="请输入页数"
+        />
+      </view>
+    </view>
+
+    <!-- 杂志特有字段 -->
+    <view class="form-group" wx:if="{{type === 'magazine'}}">
+      <view class="form-item">
+        <text class="label">ISSN</text>
+        <input 
+          class="input" 
+          name="issn" 
+          value="{{form.issn}}" 
+          placeholder="请输入ISSN"
+          maxlength="8"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">出版社</text>
+        <input 
+          class="input" 
+          name="publisher" 
+          value="{{form.publisher}}" 
+          placeholder="请输入出版社"
+          maxlength="128"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">期号</text>
+        <input 
+          class="input" 
+          name="issue_number" 
+          value="{{form.issue_number}}" 
+          placeholder="请输入期号"
+          maxlength="32"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">出版日期</text>
+        <picker 
+          mode="date" 
+          value="{{form.publish_date}}" 
+          bindchange="handlePublishDateChange"
+        >
+          <view class="picker">{{form.publish_date || '请选择出版日期'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">语言</text>
+        <input 
+          class="input" 
+          name="language" 
+          value="{{form.language}}" 
+          placeholder="请输入语言"
+          maxlength="32"
+        />
+      </view>
+    </view>
+
+    <!-- CD特有字段 -->
+    <view class="form-group" wx:if="{{type === 'cd'}}">
+      <view class="form-item">
+        <text class="label">ISRC</text>
+        <input 
+          class="input" 
+          name="isrc" 
+          value="{{form.isrc}}" 
+          placeholder="请输入ISRC"
+          maxlength="12"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">艺术家</text>
+        <input 
+          class="input" 
+          name="artist" 
+          value="{{form.artist}}" 
+          placeholder="请输入艺术家"
+          maxlength="256"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">唱片公司</text>
+        <input 
+          class="input" 
+          name="label" 
+          value="{{form.label}}" 
+          placeholder="请输入唱片公司"
+          maxlength="128"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">发行日期</text>
+        <picker 
+          mode="date" 
+          value="{{form.release_date}}" 
+          bindchange="handleReleaseDateChange"
+        >
+          <view class="picker">{{form.release_date || '请选择发行日期'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">流派</text>
+        <input 
+          class="input" 
+          name="genre" 
+          value="{{form.genre}}" 
+          placeholder="请输入流派"
+          maxlength="64"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">时长(秒)</text>
+        <input 
+          class="input" 
+          type="number" 
+          name="duration" 
+          value="{{form.duration}}" 
+          placeholder="请输入时长"
+        />
+      </view>
+    </view>
+
+    <!-- 黑胶唱片特有字段 -->
+    <view class="form-group" wx:if="{{type === 'vinyl'}}">
+      <view class="form-item">
+        <text class="label">ISRC</text>
+        <input 
+          class="input" 
+          name="isrc" 
+          value="{{form.isrc}}" 
+          placeholder="请输入ISRC"
+          maxlength="12"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">艺术家</text>
+        <input 
+          class="input" 
+          name="artist" 
+          value="{{form.artist}}" 
+          placeholder="请输入艺术家"
+          maxlength="256"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">唱片公司</text>
+        <input 
+          class="input" 
+          name="label" 
+          value="{{form.label}}" 
+          placeholder="请输入唱片公司"
+          maxlength="128"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">发行日期</text>
+        <picker 
+          mode="date" 
+          value="{{form.release_date}}" 
+          bindchange="handleReleaseDateChange"
+        >
+          <view class="picker">{{form.release_date || '请选择发行日期'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">流派</text>
+        <input 
+          class="input" 
+          name="genre" 
+          value="{{form.genre}}" 
+          placeholder="请输入流派"
+          maxlength="64"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">转速(RPM)</text>
+        <input 
+          class="input" 
+          type="number" 
+          name="rpm" 
+          value="{{form.rpm}}" 
+          placeholder="请输入转速"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">尺寸(英寸)</text>
+        <input 
+          class="input" 
+          type="digit" 
+          name="size" 
+          value="{{form.size}}" 
+          placeholder="请输入尺寸"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">时长(秒)</text>
+        <input 
+          class="input" 
+          type="number" 
+          name="duration" 
+          value="{{form.duration}}" 
+          placeholder="请输入时长"
+        />
+      </view>
+    </view>
+
+    <!-- DVD特有字段 -->
+    <view class="form-group" wx:if="{{type === 'dvd'}}">
+      <view class="form-item">
+        <text class="label">ISAN</text>
+        <input 
+          class="input" 
+          name="isan" 
+          value="{{form.isan}}" 
+          placeholder="请输入ISAN"
+          maxlength="26"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">导演</text>
+        <input 
+          class="input" 
+          name="director" 
+          value="{{form.director}}" 
+          placeholder="请输入导演"
+          maxlength="256"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">制作公司</text>
+        <input 
+          class="input" 
+          name="studio" 
+          value="{{form.studio}}" 
+          placeholder="请输入制作公司"
+          maxlength="128"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">发行日期</text>
+        <picker 
+          mode="date" 
+          value="{{form.release_date}}" 
+          bindchange="handleReleaseDateChange"
+        >
+          <view class="picker">{{form.release_date || '请选择发行日期'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">类型</text>
+        <input 
+          class="input" 
+          name="genre" 
+          value="{{form.genre}}" 
+          placeholder="请输入类型"
+          maxlength="64"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">时长(分钟)</text>
+        <input 
+          class="input" 
+          type="number" 
+          name="duration" 
+          value="{{form.duration}}" 
+          placeholder="请输入时长"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">区域码</text>
+        <input 
+          class="input" 
+          name="region_code" 
+          value="{{form.region_code}}" 
+          placeholder="请输入区域码"
+          maxlength="8"
+        />
+      </view>
+    </view>
+
+    <!-- 游戏卡带特有字段 -->
+    <view class="form-group" wx:if="{{type === 'game_cartridge'}}">
+      <view class="form-item">
+        <text class="label">产品编号</text>
+        <input 
+          class="input" 
+          name="product_code" 
+          value="{{form.product_code}}" 
+          placeholder="请输入产品编号"
+          maxlength="32"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">开发商</text>
+        <input 
+          class="input" 
+          name="developer" 
+          value="{{form.developer}}" 
+          placeholder="请输入开发商"
+          maxlength="256"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">发行商</text>
+        <input 
+          class="input" 
+          name="publisher" 
+          value="{{form.publisher}}" 
+          placeholder="请输入发行商"
+          maxlength="256"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">平台</text>
+        <input 
+          class="input" 
+          name="platform" 
+          value="{{form.platform}}" 
+          placeholder="请输入平台"
+          maxlength="64"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">发行日期</text>
+        <picker 
+          mode="date" 
+          value="{{form.release_date}}" 
+          bindchange="handleReleaseDateChange"
+        >
+          <view class="picker">{{form.release_date || '请选择发行日期'}}</view>
+        </picker>
+      </view>
+
+      <view class="form-item">
+        <text class="label">类型</text>
+        <input 
+          class="input" 
+          name="genre" 
+          value="{{form.genre}}" 
+          placeholder="请输入类型"
+          maxlength="64"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">发行区域</text>
+        <input 
+          class="input" 
+          name="region" 
+          value="{{form.region}}" 
+          placeholder="请输入发行区域"
+          maxlength="32"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">语言</text>
+        <input 
+          class="input" 
+          name="language" 
+          value="{{form.language}}" 
+          placeholder="请输入语言"
+          maxlength="32"
+        />
+      </view>
+    </view>
+
+    <!-- 提交按钮 -->
+    <button 
+      class="submit-btn" 
+      type="primary" 
+      form-type="submit"
+      loading="{{submitting}}"
+    >保存</button>
+  </form>
+</view> 

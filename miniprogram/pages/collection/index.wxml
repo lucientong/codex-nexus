@@ -1,4 +1,91 @@
 <!--pages/collection/index.wxml-->
 <view class="container">
-  <text>我的藏品</text>
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <view class="search-input-wrap">
+      <input 
+        class="search-input" 
+        placeholder="搜索藏品" 
+        value="{{keyword}}"
+        bindinput="handleSearchInput"
+        bindconfirm="handleSearch"
+      />
+      <text class="icon-search">🔍</text>
+    </view>
+  </view>
+
+  <!-- 类型切换 -->
+  <view class="type-tabs">
+    <view 
+      class="tab-item {{currentType === type.value ? 'active' : ''}}" 
+      wx:for="{{collectionTypes}}" 
+      wx:key="value"
+      wx:for-item="type"
+      bindtap="handleChangeType"
+      data-type="{{type.value}}"
+    >
+      {{type.label}}
+    </view>
+  </view>
+
+  <!-- 藏品列表 -->
+  <scroll-view 
+    class="collection-list" 
+    scroll-y 
+    bindscrolltolower="handleLoadMore"
+    refresher-enabled
+    bindrefresherrefresh="handleRefresh"
+    refresher-triggered="{{refreshing}}"
+  >
+    <view wx:if="{{collections.length > 0}}">
+      <view class="collection-item" wx:for="{{collections}}" wx:key="id" bindtap="handleViewDetail" data-id="{{item.id}}">
+        <image class="cover" src="{{item.cover_url || '/assets/icons/default-cover.png'}}" mode="aspectFill"></image>
+        <view class="info">
+          <view class="title">{{item.title}}</view>
+          <view class="meta">
+            <text class="status {{item.status}}">{{statusMap[item.status]}}</text>
+            <text class="location" wx:if="{{item.location}}">{{item.location}}</text>
+          </view>
+          <view class="description" wx:if="{{item.description}}">{{item.description}}</view>
+        </view>
+      </view>
+      
+      <!-- 加载状态 -->
+      <view class="loading" wx:if="{{loading}}">加载中...</view>
+      <view class="no-more" wx:if="{{!hasMore && !loading}}">没有更多了</view>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty" wx:else>
+      <image class="empty-icon" src="/assets/icons/empty.png"></image>
+      <text>暂无藏品</text>
+    </view>
+  </scroll-view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="handleAdd">
+    <text class="icon">+</text>
+  </view>
+
+  <!-- 添加藏品弹窗 -->
+  <view class="add-popup {{showAddPopup ? 'show' : ''}}">
+    <view class="popup-mask" bindtap="handleClosePopup"></view>
+    <view class="popup-content">
+      <view class="popup-title">添加藏品</view>
+      <view class="add-options">
+        <view class="option-item" bindtap="handleScan">
+          <text class="option-icon">📷</text>
+          <text class="option-text">扫码添加</text>
+        </view>
+        <view class="option-item" bindtap="handlePhoto">
+          <text class="option-icon">🖼️</text>
+          <text class="option-text">拍照添加</text>
+        </view>
+        <view class="option-item" bindtap="handleManual">
+          <text class="option-icon">✍️</text>
+          <text class="option-text">手动添加</text>
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

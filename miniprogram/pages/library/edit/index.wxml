@@ -1,0 +1,46 @@
+<view class="container">
+  <form bindsubmit="handleSubmit">
+    <view class="form-group">
+      <view class="form-item">
+        <text class="label required">书房名称</text>
+        <input 
+          class="input" 
+          name="name" 
+          value="{{form.name}}" 
+          placeholder="请输入书房名称"
+          maxlength="128"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">书房描述</text>
+        <textarea 
+          class="textarea" 
+          name="description" 
+          value="{{form.description}}" 
+          placeholder="请输入书房描述"
+          maxlength="512"
+        />
+      </view>
+
+      <view class="form-item">
+        <text class="label">可见性</text>
+        <radio-group class="radio-group" bindchange="handleVisibilityChange">
+          <label class="radio-item" wx:for="{{visibilityOptions}}" wx:key="value">
+            <radio value="{{item.value}}" checked="{{form.visibility === item.value}}" />
+            <text>{{item.label}}</text>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+
+    <view class="form-actions">
+      <button 
+        class="submit-btn" 
+        type="primary" 
+        form-type="submit"
+        loading="{{submitting}}"
+      >保存</button>
+    </view>
+  </form>
+</view> 

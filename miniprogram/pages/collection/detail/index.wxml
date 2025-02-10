@@ -1,0 +1,211 @@
+<view class="container">
+  <!-- 封面区域 -->
+  <view class="cover-section">
+    <image class="cover" src="{{collection.cover_url || '/assets/icons/default-cover.png'}}" mode="aspectFill"></image>
+    <view class="status {{collection.status}}">{{statusMap[collection.status]}}</view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="info-section">
+    <view class="title">{{collection.title}}</view>
+    <view class="meta">
+      <text class="type">{{typeMap[collection.type]}}</text>
+      <text class="location" wx:if="{{collection.location}}">{{collection.location}}</text>
+    </view>
+    <view class="description" wx:if="{{collection.description}}">{{collection.description}}</view>
+  </view>
+
+  <!-- 详细信息 -->
+  <view class="detail-section">
+    <view class="section-title">详细信息</view>
+    <!-- 图书信息 -->
+    <block wx:if="{{collection.type === 'book'}}">
+      <view class="detail-item" wx:if="{{collection.isbn}}">
+        <text class="label">ISBN</text>
+        <text class="value">{{collection.isbn}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.author}}">
+        <text class="label">作者</text>
+        <text class="value">{{collection.author}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.publisher}}">
+        <text class="label">出版社</text>
+        <text class="value">{{collection.publisher}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.publish_date}}">
+        <text class="label">出版日期</text>
+        <text class="value">{{collection.publish_date}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.language}}">
+        <text class="label">语言</text>
+        <text class="value">{{collection.language}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.page_count}}">
+        <text class="label">页数</text>
+        <text class="value">{{collection.page_count}}</text>
+      </view>
+    </block>
+
+    <!-- 杂志信息 -->
+    <block wx:elif="{{collection.type === 'magazine'}}">
+      <view class="detail-item" wx:if="{{collection.issn}}">
+        <text class="label">ISSN</text>
+        <text class="value">{{collection.issn}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.publisher}}">
+        <text class="label">出版社</text>
+        <text class="value">{{collection.publisher}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.issue_number}}">
+        <text class="label">期号</text>
+        <text class="value">{{collection.issue_number}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.publish_date}}">
+        <text class="label">出版日期</text>
+        <text class="value">{{collection.publish_date}}</text>
+      </view>
+    </block>
+
+    <!-- CD信息 -->
+    <block wx:elif="{{collection.type === 'cd'}}">
+      <view class="detail-item" wx:if="{{collection.isrc}}">
+        <text class="label">ISRC</text>
+        <text class="value">{{collection.isrc}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.artist}}">
+        <text class="label">艺术家</text>
+        <text class="value">{{collection.artist}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.label}}">
+        <text class="label">唱片公司</text>
+        <text class="value">{{collection.label}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.release_date}}">
+        <text class="label">发行日期</text>
+        <text class="value">{{collection.release_date}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.genre}}">
+        <text class="label">流派</text>
+        <text class="value">{{collection.genre}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.duration}}">
+        <text class="label">时长</text>
+        <text class="value">{{formatDuration(collection.duration)}}</text>
+      </view>
+    </block>
+
+    <!-- 黑胶信息 -->
+    <block wx:elif="{{collection.type === 'vinyl'}}">
+      <view class="detail-item" wx:if="{{collection.isrc}}">
+        <text class="label">ISRC</text>
+        <text class="value">{{collection.isrc}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.artist}}">
+        <text class="label">艺术家</text>
+        <text class="value">{{collection.artist}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.label}}">
+        <text class="label">唱片公司</text>
+        <text class="value">{{collection.label}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.release_date}}">
+        <text class="label">发行日期</text>
+        <text class="value">{{collection.release_date}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.genre}}">
+        <text class="label">流派</text>
+        <text class="value">{{collection.genre}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.rpm}}">
+        <text class="label">转速</text>
+        <text class="value">{{collection.rpm}} RPM</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.size}}">
+        <text class="label">尺寸</text>
+        <text class="value">{{collection.size}}"</text>
+      </view>
+    </block>
+
+    <!-- DVD信息 -->
+    <block wx:elif="{{collection.type === 'dvd'}}">
+      <view class="detail-item" wx:if="{{collection.isan}}">
+        <text class="label">ISAN</text>
+        <text class="value">{{collection.isan}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.director}}">
+        <text class="label">导演</text>
+        <text class="value">{{collection.director}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.studio}}">
+        <text class="label">制作公司</text>
+        <text class="value">{{collection.studio}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.release_date}}">
+        <text class="label">发行日期</text>
+        <text class="value">{{collection.release_date}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.genre}}">
+        <text class="label">类型</text>
+        <text class="value">{{collection.genre}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.duration}}">
+        <text class="label">时长</text>
+        <text class="value">{{formatDuration(collection.duration)}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.region_code}}">
+        <text class="label">区域码</text>
+        <text class="value">{{collection.region_code}}</text>
+      </view>
+    </block>
+
+    <!-- 游戏卡带信息 -->
+    <block wx:elif="{{collection.type === 'game_cartridge'}}">
+      <view class="detail-item" wx:if="{{collection.product_code}}">
+        <text class="label">产品编号</text>
+        <text class="value">{{collection.product_code}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.developer}}">
+        <text class="label">开发商</text>
+        <text class="value">{{collection.developer}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.publisher}}">
+        <text class="label">发行商</text>
+        <text class="value">{{collection.publisher}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.platform}}">
+        <text class="label">平台</text>
+        <text class="value">{{collection.platform}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.release_date}}">
+        <text class="label">发行日期</text>
+        <text class="value">{{collection.release_date}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.genre}}">
+        <text class="label">类型</text>
+        <text class="value">{{collection.genre}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{collection.region}}">
+        <text class="label">发行区域</text>
+        <text class="value">{{collection.region}}</text>
+      </view>
+    </block>
+
+    <!-- 价格信息 -->
+    <view class="detail-item" wx:if="{{collection.purchase_price}}">
+      <text class="label">购入价格</text>
+      <text class="value">¥{{collection.purchase_price}}</text>
+    </view>
+    <view class="detail-item" wx:if="{{collection.market_price}}">
+      <text class="label">市场价格</text>
+      <text class="value">¥{{collection.market_price}}</text>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-section">
+    <button class="action-btn edit" bindtap="handleEdit">编辑</button>
+    <button class="action-btn borrow" bindtap="handleBorrow" wx:if="{{collection.status === 'in_library'}}">借阅</button>
+    <button class="action-btn return" bindtap="handleReturn" wx:if="{{collection.status === 'borrowed'}}">归还</button>
+    <button class="action-btn delete" bindtap="handleDelete">删除</button>
+  </view>
+</view> 

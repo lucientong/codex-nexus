@@ -1,0 +1,166 @@
+.container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding-bottom: 120rpx;
+}
+
+/* 封面区域 */
+.cover-section {
+  position: relative;
+  width: 100%;
+  height: 500rpx;
+  background-color: #fff;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+}
+
+.status {
+  position: absolute;
+  top: 30rpx;
+  right: 30rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+.status.in_library {
+  background-color: rgba(82, 196, 26, 0.8);
+}
+
+.status.borrowed {
+  background-color: rgba(24, 144, 255, 0.8);
+}
+
+.status.lost {
+  background-color: rgba(255, 77, 79, 0.8);
+}
+
+/* 基本信息 */
+.info-section {
+  padding: 30rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.type {
+  font-size: 24rpx;
+  color: #666;
+  background-color: #f5f5f5;
+  padding: 4rpx 16rpx;
+  border-radius: 4rpx;
+  margin-right: 16rpx;
+}
+
+.location {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.description {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 详细信息 */
+.detail-section {
+  padding: 30rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 操作按钮 */
+.action-section {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20rpx 30rpx;
+  background-color: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+}
+
+.action-btn {
+  flex: 1;
+  margin: 0 10rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+.action-btn::after {
+  border: none;
+}
+
+.action-btn.edit {
+  background-color: #fff;
+  border: 1rpx solid #333;
+  color: #333;
+}
+
+.action-btn.borrow {
+  background-color: #1890ff;
+  color: #fff;
+}
+
+.action-btn.return {
+  background-color: #52c41a;
+  color: #fff;
+}
+
+.action-btn.delete {
+  background-color: #ff4d4f;
+  color: #fff;
+} 

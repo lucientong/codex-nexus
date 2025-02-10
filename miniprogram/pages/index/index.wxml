@@ -1,4 +1,106 @@
 <!--pages/index/index.wxml-->
 <view class="container">
-  <text>首页</text>
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input 
+      class="search-input" 
+      placeholder="搜索藏品" 
+      bindinput="handleSearchInput"
+      value="{{keyword}}"
+    />
+    <view class="search-icon">🔍</view>
+  </view>
+
+  <!-- 轮播图 -->
+  <swiper 
+    class="banner" 
+    indicator-dots 
+    autoplay 
+    circular
+    interval="3000"
+  >
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <image src="{{item.image_url}}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+
+  <!-- 功能导航 -->
+  <view class="nav-grid">
+    <view class="nav-item" bindtap="handleNavTo" data-type="book">
+      <view class="nav-icon">📚</view>
+      <text>图书</text>
+    </view>
+    <view class="nav-item" bindtap="handleNavTo" data-type="magazine">
+      <view class="nav-icon">📰</view>
+      <text>杂志</text>
+    </view>
+    <view class="nav-item" bindtap="handleNavTo" data-type="cd">
+      <view class="nav-icon">💿</view>
+      <text>CD</text>
+    </view>
+    <view class="nav-item" bindtap="handleNavTo" data-type="vinyl">
+      <view class="nav-icon">🎵</view>
+      <text>黑胶</text>
+    </view>
+    <view class="nav-item" bindtap="handleNavTo" data-type="dvd">
+      <view class="nav-icon">📀</view>
+      <text>DVD</text>
+    </view>
+    <view class="nav-item" bindtap="handleNavTo" data-type="game">
+      <view class="nav-icon">🎮</view>
+      <text>游戏</text>
+    </view>
+  </view>
+
+  <!-- 最新藏品 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">最新藏品</text>
+      <text class="section-more" bindtap="handleViewMore" data-type="latest">查看更多</text>
+    </view>
+    <scroll-view class="collection-scroll" scroll-x>
+      <view class="collection-list">
+        <view 
+          class="collection-item" 
+          wx:for="{{latestCollections}}" 
+          wx:key="id"
+          bindtap="handleViewDetail"
+          data-id="{{item.id}}"
+          data-type="{{item.type}}"
+        >
+          <image class="collection-cover" src="{{item.cover_url}}" mode="aspectFill"></image>
+          <view class="collection-info">
+            <text class="collection-title">{{item.title}}</text>
+            <text class="collection-type">{{item.type_text}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 推荐藏品 -->
+  <view class="section">
+    <view class="section-header">
+      <text class="section-title">推荐藏品</text>
+      <text class="section-more" bindtap="handleViewMore" data-type="recommended">查看更多</text>
+    </view>
+    <scroll-view class="collection-scroll" scroll-x>
+      <view class="collection-list">
+        <view 
+          class="collection-item" 
+          wx:for="{{recommendedCollections}}" 
+          wx:key="id"
+          bindtap="handleViewDetail"
+          data-id="{{item.id}}"
+          data-type="{{item.type}}"
+        >
+          <image class="collection-cover" src="{{item.cover_url}}" mode="aspectFill"></image>
+          <view class="collection-info">
+            <text class="collection-title">{{item.title}}</text>
+            <text class="collection-type">{{item.type_text}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
 </view>

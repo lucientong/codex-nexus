@@ -1,4 +1,84 @@
 <!--pages/library/index.wxml-->
 <view class="container">
-  <text>我的书房</text>
+  <!-- 顶部操作栏 -->
+  <view class="action-bar">
+    <view class="search-bar">
+      <input 
+        class="search-input" 
+        placeholder="搜索书房" 
+        bindinput="handleSearchInput"
+        value="{{keyword}}"
+      />
+      <view class="search-icon">🔍</view>
+    </view>
+    <view class="add-btn" bindtap="handleCreateLibrary">
+      <text class="add-icon">+</text>
+    </view>
+  </view>
+
+  <!-- 书房列表 -->
+  <scroll-view 
+    class="library-list" 
+    scroll-y 
+    bindscrolltolower="handleLoadMore"
+    refresher-enabled
+    bindrefresherrefresh="handleRefresh"
+    refresher-triggered="{{refreshing}}"
+  >
+    <view wx:if="{{libraries.length > 0}}">
+      <view 
+        class="library-item" 
+        wx:for="{{libraries}}" 
+        wx:key="id"
+        bindtap="handleViewLibrary"
+        data-id="{{item.id}}"
+      >
+        <view class="library-info">
+          <view class="library-header">
+            <text class="library-name">{{item.name}}</text>
+            <text class="library-visibility {{item.visibility}}">{{visibilityMap[item.visibility]}}</text>
+          </view>
+          <text class="library-description">{{item.description || '暂无描述'}}</text>
+          <view class="library-stats">
+            <view class="stat-item">
+              <text class="stat-label">藏品</text>
+              <text class="stat-value">{{item.collection_count || 0}}</text>
+            </view>
+            <view class="stat-item">
+              <text class="stat-label">已借出</text>
+              <text class="stat-value">{{item.borrowed_count || 0}}</text>
+            </view>
+            <view class="stat-item">
+              <text class="stat-label">借阅</text>
+              <text class="stat-value">{{item.borrow_count || 0}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="library-actions">
+          <view 
+            class="action-item edit" 
+            catchtap="handleEditLibrary" 
+            data-id="{{item.id}}"
+          >
+            <text class="action-icon">✏️</text>
+          </view>
+          <view 
+            class="action-item delete" 
+            catchtap="handleDeleteLibrary" 
+            data-id="{{item.id}}"
+          >
+            <text class="action-icon">🗑️</text>
+          </view>
+        </view>
+      </view>
+      <!-- 加载更多 -->
+      <view class="loading" wx:if="{{loading}}">加载中...</view>
+      <view class="no-more" wx:if="{{!hasMore && !loading}}">没有更多了</view>
+    </view>
+    <!-- 空状态 -->
+    <view class="empty" wx:else>
+      <image class="empty-icon" src="/assets/icons/empty-library.png"></image>
+      <text>暂无书房，点击右上角添加</text>
+    </view>
+  </scroll-view>
 </view>
