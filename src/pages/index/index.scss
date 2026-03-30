@@ -1,0 +1,541 @@
+/**
+ * 首页样式
+ * 设计理念：温暖木质、柔和光影、精致细节
+ */
+
+.index-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--color-bg-warm) 0%, var(--color-bg-primary) 40%);
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+// ==================== 顶部区域 ====================
+.page-header {
+  padding: 40rpx 32rpx 32rpx;
+  background: linear-gradient(180deg, #F5EDE4 0%, transparent 100%);
+  
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32rpx;
+  }
+  
+  .brand {
+    .brand-name {
+      display: block;
+      font-size: 56rpx;
+      font-weight: 700;
+      color: var(--color-primary);
+      letter-spacing: 2rpx;
+      margin-bottom: 8rpx;
+    }
+    
+    .brand-slogan {
+      display: block;
+      font-size: 26rpx;
+      color: var(--color-text-secondary);
+      letter-spacing: 1rpx;
+    }
+  }
+  
+  .user-info {
+    .user-avatar {
+      width: 80rpx;
+      height: 80rpx;
+      border-radius: 50%;
+      border: 4rpx solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 4rpx 16rpx rgba(139, 69, 19, 0.15);
+    }
+  }
+}
+
+// 统计概览
+.stats-overview {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-xl);
+  padding: 24rpx 16rpx;
+  box-shadow: var(--shadow-sm);
+  
+  .stat-item {
+    flex: 1;
+    text-align: center;
+    
+    .stat-value {
+      display: block;
+      font-size: 40rpx;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 4rpx;
+    }
+    
+    .stat-label {
+      display: block;
+      font-size: 22rpx;
+      color: var(--color-text-tertiary);
+    }
+  }
+  
+  .stat-divider {
+    width: 1rpx;
+    height: 48rpx;
+    background: linear-gradient(180deg, transparent 0%, #E0D5C8 50%, transparent 100%);
+  }
+}
+
+// ==================== 内容区域 ====================
+.page-content {
+  padding: 0 32rpx;
+  min-height: 60vh;
+}
+
+// 列表头部
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+  padding-top: 16rpx;
+  
+  .list-title {
+    font-size: 32rpx;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  .add-btn {
+    display: flex;
+    align-items: center;
+    gap: 8rpx;
+    padding: 12rpx 20rpx;
+    background: var(--color-primary);
+    border-radius: 32rpx;
+    transition: all var(--transition-fast);
+    
+    &:active {
+      transform: scale(0.95);
+      opacity: 0.9;
+    }
+    
+    .add-icon {
+      font-size: 28rpx;
+      color: #fff;
+      font-weight: 300;
+    }
+    
+    .add-text {
+      font-size: 24rpx;
+      color: #fff;
+    }
+  }
+}
+
+// 书房网格
+.library-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24rpx;
+  padding-bottom: 32rpx;
+}
+
+// ==================== 书房卡片 ====================
+.library-card {
+  width: calc(50% - 12rpx);
+  background: var(--color-bg-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  transition: all var(--transition-normal);
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: var(--shadow-sm);
+  }
+  
+  // 封面区域
+  .card-covers {
+    width: 100%;
+    height: 200rpx;
+    background: linear-gradient(135deg, #F5EDE4 0%, #E8DFD5 100%);
+    position: relative;
+    overflow: hidden;
+    
+    .covers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      width: 100%;
+      height: 100%;
+      gap: 2rpx;
+      
+      .cover-item {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .empty-covers {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      
+      .shelf-lines {
+        position: absolute;
+        width: 80%;
+        height: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        
+        .shelf-line {
+          width: 100%;
+          height: 4rpx;
+          background: linear-gradient(90deg, transparent 0%, #D4C4B5 50%, transparent 100%);
+        }
+      }
+      
+      .empty-text {
+        position: relative;
+        z-index: 1;
+        font-size: 24rpx;
+        color: var(--color-text-tertiary);
+      }
+    }
+  }
+  
+  // 信息区域
+  .card-info {
+    padding: 20rpx 16rpx;
+    
+    .library-name {
+      display: block;
+      font-size: 28rpx;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 8rpx;
+    }
+    
+    .library-meta {
+      .item-count {
+        display: block;
+        font-size: 22rpx;
+        color: var(--color-text-secondary);
+      }
+      
+      .description {
+        display: block;
+        font-size: 20rpx;
+        color: var(--color-text-tertiary);
+        margin-top: 4rpx;
+      }
+    }
+  }
+  
+  // 装饰角标
+  .card-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 32rpx 32rpx 0;
+    border-color: transparent var(--color-primary-lighter) transparent transparent;
+    opacity: 0.6;
+  }
+}
+
+// ==================== 空状态 ====================
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 48rpx;
+  text-align: center;
+  
+  .empty-illustration {
+    margin-bottom: 40rpx;
+    
+    .bookshelf-icon {
+      width: 200rpx;
+      height: 160rpx;
+      position: relative;
+      
+      .shelf {
+        position: absolute;
+        width: 100%;
+        height: 8rpx;
+        background: linear-gradient(180deg, #C4A77D 0%, #A0845A 100%);
+        border-radius: 2rpx;
+        box-shadow: 0 4rpx 8rpx rgba(139, 69, 19, 0.2);
+        
+        &:nth-child(1) { top: 40rpx; }
+        &:nth-child(2) { top: 90rpx; }
+        &:nth-child(3) { top: 140rpx; }
+      }
+      
+      .book {
+        position: absolute;
+        width: 24rpx;
+        border-radius: 2rpx;
+        
+        &.book-1 {
+          height: 36rpx;
+          background: linear-gradient(180deg, #8B4513 0%, #6B3410 100%);
+          left: 30rpx;
+          top: 4rpx;
+        }
+        
+        &.book-2 {
+          height: 32rpx;
+          background: linear-gradient(180deg, #CD853F 0%, #A0683C 100%);
+          left: 60rpx;
+          top: 8rpx;
+        }
+        
+        &.book-3 {
+          height: 28rpx;
+          background: linear-gradient(180deg, #A0522D 0%, #803F22 100%);
+          left: 90rpx;
+          top: 12rpx;
+        }
+      }
+    }
+  }
+  
+  .empty-title {
+    display: block;
+    font-size: 36rpx;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 16rpx;
+  }
+  
+  .empty-desc {
+    display: block;
+    font-size: 26rpx;
+    color: var(--color-text-secondary);
+    margin-bottom: 48rpx;
+    line-height: 1.6;
+  }
+}
+
+// ==================== 加载状态 ====================
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+  
+  .loading-spinner {
+    width: 64rpx;
+    height: 64rpx;
+    border: 4rpx solid var(--color-bg-warm);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  .loading-text {
+    margin-top: 24rpx;
+    font-size: 26rpx;
+    color: var(--color-text-tertiary);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ==================== 悬浮按钮 ====================
+.fab-button {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(180rpx + env(safe-area-inset-bottom));
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 32rpx rgba(139, 69, 19, 0.35);
+  z-index: 100;
+  transition: all var(--transition-fast);
+  
+  &:active {
+    transform: scale(0.9);
+    box-shadow: 0 4rpx 16rpx rgba(139, 69, 19, 0.3);
+  }
+  
+  .fab-icon {
+    font-size: 56rpx;
+    color: #fff;
+    font-weight: 300;
+    line-height: 1;
+  }
+}
+
+// ==================== 弹窗样式 ====================
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 48rpx;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 600rpx;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 16rpx 48rpx rgba(0, 0, 0, 0.2);
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32rpx;
+    border-bottom: 1rpx solid var(--color-bg-warm);
+    
+    .modal-title {
+      font-size: 34rpx;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+    
+    .modal-close {
+      width: 56rpx;
+      height: 56rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .close-icon {
+        font-size: 48rpx;
+        color: var(--color-text-tertiary);
+        line-height: 1;
+      }
+    }
+  }
+  
+  .modal-body {
+    padding: 32rpx;
+    
+    .form-group {
+      margin-bottom: 32rpx;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .form-label {
+        display: block;
+        font-size: 26rpx;
+        color: var(--color-text-secondary);
+        margin-bottom: 16rpx;
+      }
+      
+      .form-input,
+      .form-textarea {
+        width: 100%;
+        padding: 24rpx;
+        background: var(--color-bg-primary);
+        border: 2rpx solid transparent;
+        border-radius: var(--radius-md);
+        font-size: 28rpx;
+        color: var(--color-text-primary);
+        transition: all var(--transition-fast);
+        
+        &:focus {
+          border-color: var(--color-primary);
+          background: var(--color-bg-white);
+        }
+        
+        &::placeholder {
+          color: var(--color-text-tertiary);
+        }
+      }
+      
+      .form-textarea {
+        height: 160rpx;
+        resize: none;
+      }
+    }
+  }
+  
+  .modal-footer {
+    display: flex;
+    gap: 24rpx;
+    padding: 24rpx 32rpx 32rpx;
+    
+    .btn {
+      flex: 1;
+    }
+  }
+}
+
+// ==================== 按钮样式 ====================
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 32rpx;
+  border-radius: var(--radius-md);
+  font-size: 28rpx;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  &.btn-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    color: #fff;
+    box-shadow: 0 4rpx 16rpx rgba(139, 69, 19, 0.25);
+    
+    &:active {
+      box-shadow: 0 2rpx 8rpx rgba(139, 69, 19, 0.2);
+    }
+  }
+  
+  &.btn-secondary {
+    background: var(--color-bg-primary);
+    color: var(--color-text-secondary);
+  }
+  
+  &.btn-large {
+    padding: 28rpx 48rpx;
+    font-size: 30rpx;
+  }
+  
+  &.btn-loading {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+}
+
+// ==================== 列表容器 ====================
+.library-list {
+  height: calc(100vh - 400rpx);
+}

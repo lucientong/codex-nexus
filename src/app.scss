@@ -1,0 +1,275 @@
+// 全局样式文件
+// 藏书云廊 - 设计系统
+
+// ==================== CSS 变量 ====================
+:root {
+  // 主色调 - 温暖木质棕色系
+  --color-primary: #8B4513;
+  --color-primary-light: #A0522D;
+  --color-primary-lighter: #CD853F;
+  
+  // 背景色
+  --color-bg-primary: #FAF8F5;
+  --color-bg-white: #FFFFFF;
+  --color-bg-warm: #F5F0E8;
+  
+  // 文字色
+  --color-text-primary: #2D2D2D;
+  --color-text-secondary: #666666;
+  --color-text-tertiary: #999999;
+  
+  // 功能色
+  --color-success: #52C41A;
+  --color-error: #FF4D4F;
+  --color-info: #1890FF;
+  --color-warning: #FAAD14;
+  
+  // 字体
+  --font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  
+  // 字号
+  --font-size-xs: 22rpx;
+  --font-size-sm: 24rpx;
+  --font-size-base: 28rpx;
+  --font-size-md: 30rpx;
+  --font-size-lg: 34rpx;
+  --font-size-xl: 40rpx;
+  --font-size-xxl: 48rpx;
+  
+  // 圆角
+  --radius-sm: 8rpx;
+  --radius-md: 12rpx;
+  --radius-lg: 16rpx;
+  --radius-xl: 24rpx;
+  --radius-round: 50%;
+  
+  // 阴影
+  --shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4rpx 16rpx rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8rpx 24rpx rgba(0, 0, 0, 0.12);
+  
+  // 间距
+  --spacing-xs: 8rpx;
+  --spacing-sm: 16rpx;
+  --spacing-md: 24rpx;
+  --spacing-lg: 32rpx;
+  --spacing-xl: 48rpx;
+  
+  // 动画
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}
+
+// ==================== 全局样式 ====================
+page {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 盒模型
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+// 图片
+image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+// 按钮重置
+button {
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  background: none;
+  border: none;
+  outline: none;
+  
+  &::after {
+    border: none;
+  }
+}
+
+// 输入框重置
+input, textarea {
+  font-size: inherit;
+  font-family: inherit;
+  outline: none;
+}
+
+// ==================== 通用工具类 ====================
+// Flexbox
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+
+.items-end {
+  align-items: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+// 文字省略
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 文字对齐
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// 文字颜色
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-tertiary {
+  color: var(--color-text-tertiary);
+}
+
+.text-brand {
+  color: var(--color-primary);
+}
+
+// 背景色
+.bg-white {
+  background-color: var(--color-bg-white);
+}
+
+.bg-primary {
+  background-color: var(--color-bg-primary);
+}
+
+.bg-warm {
+  background-color: var(--color-bg-warm);
+}
+
+// 安全区域
+.safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-area-top {
+  padding-top: constant(safe-area-inset-top);
+  padding-top: env(safe-area-inset-top);
+}
+
+// 隐藏滚动条
+.hide-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
+}
+
+// ==================== 动画 ====================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn var(--transition-normal);
+}
+
+.animate-slideUp {
+  animation: slideUp var(--transition-normal);
+}
+
+.animate-scaleIn {
+  animation: scaleIn var(--transition-normal);
+}

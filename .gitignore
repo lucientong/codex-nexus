@@ -1,0 +1,40 @@
+# editor
+.vscode/
+.idea/
+.cursor/
+.codebuddy/
+
+# dependencies
+node_modules/
+
+# production
+dist/
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# local env files
+.env.local
+.env.*.local
+.env.development
+.env.production
+project.private.config.json
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Taro
+.temp/
+.swc/
+
+# 云开发
+cloud/functions/*/node_modules/

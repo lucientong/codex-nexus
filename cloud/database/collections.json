@@ -1,0 +1,64 @@
+{
+  "collections": [
+    {
+      "name": "users",
+      "description": "用户信息表",
+      "indexes": [
+        {
+          "name": "openid_unique",
+          "keys": [{ "openid": 1 }],
+          "unique": true
+        }
+      ]
+    },
+    {
+      "name": "libraries",
+      "description": "书房表",
+      "indexes": [
+        {
+          "name": "userId_index",
+          "keys": [{ "userId": 1 }]
+        },
+        {
+          "name": "userId_createdAt_index",
+          "keys": [{ "userId": 1 }, { "createdAt": -1 }]
+        }
+      ]
+    },
+    {
+      "name": "items",
+      "description": "藏品表",
+      "indexes": [
+        {
+          "name": "libraryId_index",
+          "keys": [{ "libraryId": 1 }]
+        },
+        {
+          "name": "userId_index",
+          "keys": [{ "userId": 1 }]
+        },
+        {
+          "name": "libraryId_type_index",
+          "keys": [{ "libraryId": 1 }, { "type": 1 }]
+        },
+        {
+          "name": "libraryId_createdAt_index",
+          "keys": [{ "libraryId": 1 }, { "createdAt": -1 }]
+        },
+        {
+          "name": "userId_isbn_index",
+          "keys": [{ "userId": 1 }, { "extraFields.isbn": 1 }]
+        },
+        {
+          "name": "userId_barcode_index",
+          "keys": [{ "userId": 1 }, { "extraFields.barcode": 1 }]
+        },
+        {
+          "name": "title_text_index",
+          "keys": [{ "title": "text" }]
+        }
+      ]
+    }
+  ],
+  "note": "请在云开发控制台手动创建这些集合和索引"
+}

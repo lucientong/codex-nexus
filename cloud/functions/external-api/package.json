@@ -1,0 +1,11 @@
+{
+  "name": "external-api",
+  "version": "1.0.0",
+  "description": "外部数据源 API 服务",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}

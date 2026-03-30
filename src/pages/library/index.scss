@@ -1,0 +1,693 @@
+/**
+ * 书房详情页样式
+ * 设计理念：木质书架、唱片架的拟物化效果
+ */
+
+.library-page {
+  min-height: 100vh;
+  background: var(--color-bg-primary);
+  padding-bottom: calc(120rpx + env(safe-area-inset-bottom));
+}
+
+// ==================== 工具栏 ====================
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  background: var(--color-bg-white);
+  border-bottom: 1rpx solid var(--color-bg-warm);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  
+  .toolbar-left {
+    display: flex;
+    gap: 8rpx;
+  }
+  
+  .toolbar-right {
+    display: flex;
+    gap: 16rpx;
+  }
+  
+  .view-switch {
+    display: flex;
+    align-items: center;
+    gap: 6rpx;
+    padding: 12rpx 20rpx;
+    border-radius: 32rpx;
+    background: var(--color-bg-primary);
+    transition: all var(--transition-fast);
+    
+    &.active {
+      background: var(--color-primary);
+      
+      .switch-icon,
+      .switch-label {
+        color: #fff;
+      }
+    }
+    
+    .switch-icon {
+      font-size: 24rpx;
+    }
+    
+    .switch-label {
+      font-size: 22rpx;
+      color: var(--color-text-secondary);
+    }
+  }
+  
+  .tool-btn {
+    display: flex;
+    align-items: center;
+    gap: 4rpx;
+    padding: 12rpx 16rpx;
+    
+    .btn-icon {
+      font-size: 24rpx;
+      color: var(--color-text-secondary);
+    }
+    
+    .btn-label {
+      font-size: 22rpx;
+      color: var(--color-text-secondary);
+    }
+  }
+}
+
+// ==================== 统计栏 ====================
+.stats-bar {
+  padding: 16rpx 24rpx;
+  background: var(--color-bg-warm);
+  
+  .stats-text {
+    font-size: 24rpx;
+    color: var(--color-text-secondary);
+  }
+}
+
+// ==================== 内容区域 ====================
+.content-area {
+  height: calc(100vh - 180rpx);
+}
+
+// ==================== 书架视图 ====================
+.bookshelf {
+  padding: 24rpx;
+  
+  .shelf-section {
+    margin-bottom: 48rpx;
+    
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12rpx;
+      margin-bottom: 24rpx;
+      padding-left: 8rpx;
+      
+      .section-title {
+        font-size: 30rpx;
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
+      
+      .section-count {
+        font-size: 22rpx;
+        color: var(--color-text-tertiary);
+      }
+    }
+  }
+  
+  // 书架行
+  .shelf-row {
+    margin-bottom: 32rpx;
+    
+    .shelf-items {
+      display: flex;
+      gap: 16rpx;
+      padding: 0 16rpx;
+      min-height: 180rpx;
+      align-items: flex-end;
+    }
+    
+    // 书架板
+    .shelf-board {
+      position: relative;
+      height: 16rpx;
+      margin-top: 8rpx;
+      
+      .board-surface {
+        height: 12rpx;
+        background: linear-gradient(180deg, #C4A77D 0%, #A0845A 100%);
+        border-radius: 2rpx;
+        box-shadow: 
+          0 2rpx 4rpx rgba(0, 0, 0, 0.1),
+          inset 0 1rpx 0 rgba(255, 255, 255, 0.3);
+      }
+      
+      .board-edge {
+        position: absolute;
+        bottom: -4rpx;
+        left: 0;
+        right: 0;
+        height: 8rpx;
+        background: linear-gradient(180deg, #8B6914 0%, #6B4E0A 100%);
+        border-radius: 0 0 2rpx 2rpx;
+        box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.15);
+      }
+    }
+    
+    // 唱片架样式
+    &.vinyl-shelf {
+      .shelf-items {
+        padding-bottom: 16rpx;
+      }
+      
+      .vinyl-board {
+        .board-surface {
+          background: linear-gradient(180deg, #3D3D3D 0%, #2D2D2D 100%);
+        }
+      }
+    }
+  }
+}
+
+// ==================== 藏品封面 ====================
+.item-cover {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+  
+  &:active {
+    transform: scale(0.95);
+  }
+  
+  .cover-image {
+    display: block;
+    object-fit: cover;
+  }
+  
+  .cover-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #E8DFD5 0%, #D4C8BC 100%);
+    
+    .placeholder-text {
+      font-size: 20rpx;
+      color: var(--color-text-secondary);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+  }
+  
+  // 图书封面
+  &.book-cover,
+  &.magazine-cover {
+    width: 100rpx;
+    height: 140rpx;
+    perspective: 500rpx;
+    transform-style: preserve-3d;
+    
+    .cover-image,
+    .cover-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 2rpx 6rpx 6rpx 2rpx;
+      transform: rotateY(-5deg);
+      box-shadow: 
+        4rpx 4rpx 8rpx rgba(0, 0, 0, 0.2),
+        -2rpx 0 4rpx rgba(0, 0, 0, 0.1);
+    }
+    
+    // 书脊
+    .book-spine {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 8rpx;
+      background: linear-gradient(90deg, 
+        rgba(0, 0, 0, 0.3) 0%, 
+        rgba(0, 0, 0, 0.1) 50%,
+        transparent 100%
+      );
+      border-radius: 2rpx 0 0 2rpx;
+      transform: rotateY(-5deg);
+    }
+    
+    // 书页效果
+    .book-pages {
+      position: absolute;
+      right: 0;
+      top: 4rpx;
+      bottom: 4rpx;
+      width: 6rpx;
+      background: repeating-linear-gradient(
+        0deg,
+        #F8F4EF 0,
+        #F8F4EF 1rpx,
+        #E8E0D8 1rpx,
+        #E8E0D8 2rpx
+      );
+      transform: rotateY(-5deg) translateX(2rpx);
+    }
+  }
+  
+  // 黑胶封面
+  &.vinyl-cover {
+    width: 140rpx;
+    height: 140rpx;
+    
+    .cover-image,
+    .cover-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 4rpx;
+      box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.2);
+    }
+    
+    // 黑胶唱片
+    .vinyl-disc {
+      position: absolute;
+      right: -20rpx;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100rpx;
+      height: 100rpx;
+      background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+      border-radius: 50%;
+      box-shadow: 
+        0 2rpx 8rpx rgba(0, 0, 0, 0.3),
+        inset 0 0 20rpx rgba(0, 0, 0, 0.5);
+      
+      .disc-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30rpx;
+        height: 30rpx;
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+        border-radius: 50%;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 8rpx;
+          height: 8rpx;
+          background: #2D2D2D;
+          border-radius: 50%;
+        }
+      }
+      
+      .disc-grooves {
+        position: absolute;
+        top: 10%;
+        left: 10%;
+        right: 10%;
+        bottom: 10%;
+        border: 1rpx solid rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          top: 15%;
+          left: 15%;
+          right: 15%;
+          bottom: 15%;
+          border: 1rpx solid rgba(255, 255, 255, 0.08);
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  
+  // CD 封面
+  &.cd-cover {
+    width: 120rpx;
+    height: 120rpx;
+    
+    .cover-image,
+    .cover-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 4rpx;
+      box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+    }
+    
+    // CD 光盘
+    .cd-disc {
+      position: absolute;
+      right: -16rpx;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 80rpx;
+      height: 80rpx;
+      background: linear-gradient(
+        135deg,
+        #e8e8e8 0%,
+        #c0c0c0 20%,
+        #a0a0a0 40%,
+        #d0d0d0 60%,
+        #b0b0b0 80%,
+        #c8c8c8 100%
+      );
+      border-radius: 50%;
+      box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.2);
+      
+      .cd-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20rpx;
+        height: 20rpx;
+        background: transparent;
+        border-radius: 50%;
+        border: 2rpx solid rgba(0, 0, 0, 0.2);
+      }
+      
+      .cd-rainbow {
+        position: absolute;
+        top: 25%;
+        left: 25%;
+        right: 25%;
+        bottom: 25%;
+        background: conic-gradient(
+          from 0deg,
+          rgba(255, 0, 0, 0.1),
+          rgba(255, 165, 0, 0.1),
+          rgba(255, 255, 0, 0.1),
+          rgba(0, 128, 0, 0.1),
+          rgba(0, 0, 255, 0.1),
+          rgba(75, 0, 130, 0.1),
+          rgba(238, 130, 238, 0.1),
+          rgba(255, 0, 0, 0.1)
+        );
+        border-radius: 50%;
+      }
+    }
+  }
+  
+  // DVD 封面
+  &.dvd-cover {
+    width: 90rpx;
+    height: 130rpx;
+    
+    .cover-image,
+    .cover-placeholder {
+      width: 100%;
+      height: 100%;
+      border-radius: 4rpx;
+      box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+// ==================== 列表视图 ====================
+.list-view {
+  padding: 16rpx 24rpx;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  padding: 20rpx;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-md);
+  margin-bottom: 16rpx;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: none;
+  }
+  
+  .item-cover-wrapper {
+    flex-shrink: 0;
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    
+    .item-cover {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .cover-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--color-bg-warm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      .placeholder-icon {
+        font-size: 40rpx;
+      }
+    }
+  }
+  
+  .item-info {
+    flex: 1;
+    min-width: 0;
+    
+    .item-title {
+      display: block;
+      font-size: 28rpx;
+      font-weight: 500;
+      color: var(--color-text-primary);
+      margin-bottom: 6rpx;
+    }
+    
+    .item-creator {
+      display: block;
+      font-size: 24rpx;
+      color: var(--color-text-secondary);
+      margin-bottom: 8rpx;
+    }
+    
+    .item-meta {
+      display: flex;
+      align-items: center;
+      gap: 12rpx;
+      
+      .type-tag {
+        padding: 4rpx 12rpx;
+        border-radius: 16rpx;
+        
+        text {
+          font-size: 20rpx;
+        }
+      }
+      
+      .item-price {
+        font-size: 22rpx;
+        color: var(--color-primary);
+        font-weight: 500;
+      }
+    }
+  }
+  
+  .item-arrow {
+    flex-shrink: 0;
+    
+    .arrow-icon {
+      font-size: 36rpx;
+      color: var(--color-text-tertiary);
+    }
+  }
+}
+
+// ==================== 弹窗样式 ====================
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  z-index: 1000;
+}
+
+.popup-content {
+  width: 100%;
+  background: var(--color-bg-white);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  max-height: 70vh;
+  overflow-y: auto;
+  
+  .popup-header {
+    padding: 32rpx;
+    border-bottom: 1rpx solid var(--color-bg-warm);
+    
+    .popup-title {
+      font-size: 32rpx;
+      font-weight: 600;
+      color: var(--color-text-primary);
+    }
+  }
+  
+  .popup-body {
+    padding: 16rpx 0;
+    padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  }
+}
+
+.sort-option,
+.filter-option {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 32rpx;
+  transition: background var(--transition-fast);
+  
+  &:active {
+    background: var(--color-bg-primary);
+  }
+  
+  &.active {
+    .option-label {
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+  }
+  
+  .option-color {
+    width: 24rpx;
+    height: 24rpx;
+    border-radius: 50%;
+    margin-right: 16rpx;
+  }
+  
+  .option-label {
+    flex: 1;
+    font-size: 28rpx;
+    color: var(--color-text-primary);
+  }
+  
+  .option-check {
+    font-size: 32rpx;
+    color: var(--color-primary);
+  }
+}
+
+// ==================== 空状态 ====================
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 48rpx;
+  text-align: center;
+  
+  .empty-icon {
+    font-size: 100rpx;
+    margin-bottom: 32rpx;
+  }
+  
+  .empty-title {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 16rpx;
+  }
+  
+  .empty-desc {
+    display: block;
+    font-size: 26rpx;
+    color: var(--color-text-secondary);
+    margin-bottom: 40rpx;
+  }
+}
+
+// ==================== 加载状态 ====================
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 0;
+  
+  .loading-spinner {
+    width: 64rpx;
+    height: 64rpx;
+    border: 4rpx solid var(--color-bg-warm);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  .loading-text {
+    margin-top: 24rpx;
+    font-size: 26rpx;
+    color: var(--color-text-tertiary);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+// ==================== 悬浮按钮 ====================
+.fab-button {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(100rpx + env(safe-area-inset-bottom));
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 32rpx rgba(139, 69, 19, 0.35);
+  z-index: 100;
+  transition: all var(--transition-fast);
+  
+  &:active {
+    transform: scale(0.9);
+  }
+  
+  .fab-icon {
+    font-size: 56rpx;
+    color: #fff;
+    font-weight: 300;
+    line-height: 1;
+  }
+}
+
+// ==================== 按钮样式 ====================
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 32rpx;
+  border-radius: var(--radius-md);
+  font-size: 28rpx;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  
+  &:active {
+    transform: scale(0.98);
+  }
+  
+  &.btn-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+    color: #fff;
+    box-shadow: 0 4rpx 16rpx rgba(139, 69, 19, 0.25);
+  }
+}

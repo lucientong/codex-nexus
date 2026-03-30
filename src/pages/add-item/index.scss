@@ -1,0 +1,310 @@
+/**
+ * 录入方式选择页面样式
+ * 设计风格：温暖现代 + 卡片式布局 + 微动效
+ */
+
+.add-item-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FAF8F5 0%, #F5F0E8 100%);
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+  position: relative;
+  overflow: hidden;
+}
+
+// 页面头部
+.page-header {
+  position: relative;
+  padding: 80rpx 40rpx 60rpx;
+  overflow: hidden;
+
+  .header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.1;
+      
+      &.circle-1 {
+        width: 300rpx;
+        height: 300rpx;
+        background: #8B4513;
+        top: -100rpx;
+        right: -50rpx;
+        animation: float 6s ease-in-out infinite;
+      }
+      
+      &.circle-2 {
+        width: 200rpx;
+        height: 200rpx;
+        background: #CD853F;
+        top: 50rpx;
+        right: 150rpx;
+        animation: float 8s ease-in-out infinite reverse;
+      }
+      
+      &.circle-3 {
+        width: 150rpx;
+        height: 150rpx;
+        background: #A0522D;
+        top: -30rpx;
+        left: 60rpx;
+        animation: float 7s ease-in-out infinite 1s;
+      }
+    }
+  }
+
+  .header-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-title {
+    display: block;
+    font-size: 48rpx;
+    font-weight: 700;
+    color: #2D2D2D;
+    margin-bottom: 12rpx;
+    letter-spacing: 2rpx;
+  }
+
+  .header-subtitle {
+    display: block;
+    font-size: 28rpx;
+    color: #999999;
+    letter-spacing: 1rpx;
+  }
+}
+
+// 类型选择器
+.type-selector {
+  padding: 0 40rpx;
+  margin-bottom: 40rpx;
+
+  .section-label {
+    display: block;
+    font-size: 24rpx;
+    color: #999999;
+    margin-bottom: 20rpx;
+    text-transform: uppercase;
+    letter-spacing: 2rpx;
+  }
+
+  .type-chips {
+    display: flex;
+    gap: 24rpx;
+  }
+
+  .type-chip {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+    padding: 16rpx 28rpx;
+    background: #FFFFFF;
+    border-radius: 40rpx;
+    border: 2rpx solid transparent;
+    box-shadow: 0 4rpx 16rpx rgba(139, 69, 19, 0.06);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.active {
+      transform: scale(1.02);
+      box-shadow: 0 8rpx 24rpx rgba(139, 69, 19, 0.12);
+    }
+
+    .chip-emoji {
+      font-size: 32rpx;
+    }
+
+    .chip-label {
+      font-size: 26rpx;
+      color: #666666;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+  }
+}
+
+// 录入方式卡片
+.method-cards {
+  padding: 0 40rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.method-card {
+  display: flex;
+  align-items: center;
+  padding: 32rpx;
+  background: #FFFFFF;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(139, 69, 19, 0.08);
+  transform: translateY(40rpx);
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 4rpx 16rpx rgba(139, 69, 19, 0.12);
+  }
+
+  .card-icon-wrapper {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 28rpx;
+    flex-shrink: 0;
+  }
+
+  .card-icon {
+    font-size: 48rpx;
+  }
+
+  .card-content {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .card-title {
+    display: block;
+    font-size: 32rpx;
+    font-weight: 600;
+    color: #2D2D2D;
+    margin-bottom: 8rpx;
+  }
+
+  .card-subtitle {
+    display: block;
+    font-size: 24rpx;
+    color: #999999;
+  }
+
+  .card-arrow {
+    width: 48rpx;
+    height: 48rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .arrow-icon {
+    font-size: 36rpx;
+    color: #CCCCCC;
+    font-weight: 300;
+  }
+}
+
+// 快捷扫码悬浮按钮
+.quick-scan-fab {
+  position: fixed;
+  right: 40rpx;
+  bottom: calc(120rpx + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+
+  .fab-inner {
+    width: 112rpx;
+    height: 112rpx;
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12rpx 40rpx rgba(139, 69, 19, 0.4);
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:active {
+      transform: scale(0.92);
+    }
+  }
+
+  .fab-icon {
+    font-size: 48rpx;
+    z-index: 2;
+  }
+
+  .fab-pulse {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: rgba(139, 69, 19, 0.3);
+    animation: pulse 2s ease-out infinite;
+  }
+
+  .fab-label {
+    margin-top: 12rpx;
+    font-size: 22rpx;
+    color: #8B4513;
+    font-weight: 500;
+  }
+}
+
+// 提示区域
+.tips-section {
+  margin: 48rpx 40rpx;
+  padding: 28rpx 32rpx;
+  background: rgba(139, 69, 19, 0.05);
+  border-radius: 20rpx;
+  border: 1rpx solid rgba(139, 69, 19, 0.1);
+
+  .tips-title {
+    display: block;
+    font-size: 26rpx;
+    font-weight: 600;
+    color: #8B4513;
+    margin-bottom: 16rpx;
+  }
+
+  .tips-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8rpx;
+  }
+
+  .tip-item {
+    font-size: 24rpx;
+    color: #666666;
+    line-height: 1.6;
+  }
+}
+
+// 动画
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20rpx) rotate(5deg);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
